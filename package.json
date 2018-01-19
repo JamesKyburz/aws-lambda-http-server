@@ -1,0 +1,17 @@
+{
+  "name": "aws-lambda-http-server",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
+  },
+  "dependencies": {
+    "aws-lambda-create-request-response": "0.0.1",
+    "in-memory-http-listener": "0.0.1"
+  },
+  "files": [
+    "src"
+  ],
+  "license": "Apache-2.0"
+}
