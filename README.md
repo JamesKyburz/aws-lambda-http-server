@@ -1,5 +1,7 @@
 # aws-lambda-http-server
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/aws-lambda-http-server.svg)](https://greenkeeper.io/)
+
 Call your http server stack code using an in memory http listener. No sockets needed.
 
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
