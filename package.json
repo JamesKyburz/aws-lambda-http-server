@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-http-server",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "src/index.js",
   "repository": {
     "type": "git",
