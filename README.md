@@ -2,7 +2,11 @@
 
 Call your http server stack code using an in memory http listener. No sockets needed.
 
-# server.js
+[![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
+[![downloads](https://img.shields.io/npm/dm/aws-lambda-http-server.svg)](https://npmjs.org/package/aws-lambda-http-server)
+[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/aws-lambda-http-server.svg)](https://greenkeeper.io/)
+
+## server.js
 
 ```javascript
 require('http').createServer((req, res) => {
@@ -11,14 +15,14 @@ require('http').createServer((req, res) => {
 .listen(1234)
 ```
 
-# aws-lambda.js
+## aws-lambda.js
 
 ```javascript
 exports.proxy = require('aws-lambda-http-server')
 require('./server.js')
 ```
 
-# serverless.yml
+## serverless.yml
 
 ```yaml
 service: test
