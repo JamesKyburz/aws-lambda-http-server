@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-create-request-response",
-  "version": "0.0.9",
+  "version": "0.0.15",
   "main": "src/index.js",
   "repository": {
     "type": "git",
