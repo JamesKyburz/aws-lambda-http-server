@@ -12,7 +12,7 @@ Call your http server stack code using an in memory http listener. No sockets ne
 require('http').createServer((req, res) => {
   if (req.url === '/hello') return res.end('world')
 })
-.listen(1234)
+.listen(5000)
 ```
 
 ## aws-lambda.js
@@ -34,13 +34,15 @@ provider:
 functions:
   proxy:
     handler: aws-lambda.proxy
-  events:
-    - http:
-        path: /{proxy+}
-        method: any
-    - http:
-        path: ''
-        method: any
+    environment:
+      - PORT=5000
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+      - http:
+          path: ''
+          method: any
 ```
 
 # license
