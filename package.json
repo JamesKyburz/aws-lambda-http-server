@@ -1,17 +1,13 @@
 {
-  "name": "aws-lambda-http-server",
-  "version": "0.0.14",
-  "main": "src/index.js",
+  "name": "aws-lambda-http-server-monorepo",
   "repository": {
     "type": "git",
-    "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
+    "url": "git://github.com/jameskyburz/aws-lambda-http-server.git"
   },
-  "dependencies": {
-    "aws-lambda-create-request-response": "0.0.9",
-    "in-memory-http-listener": "0.0.1"
+  "author": {
+    "name": "james kyburz",
+    "email": "james.kyburz@gmail.com"
   },
-  "files": [
-    "src"
-  ],
-  "license": "Apache-2.0"
+  "devDependencies": {},
+  "private": true
 }
