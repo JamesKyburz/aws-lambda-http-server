@@ -6,7 +6,7 @@ module.exports = (port) => handlers[port]
 
 http.createServer = fn => {
   let port = 0
-  let handler = fn || f => f
+  let handler = fn || (f => f)
   const saveHandler = fn => {
     if (fn) handler = fn
     if (port) handlers[port] = handler
