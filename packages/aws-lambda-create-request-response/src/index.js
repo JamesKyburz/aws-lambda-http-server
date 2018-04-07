@@ -4,9 +4,10 @@ const Stream = require('stream')
 const queryString = require('querystring')
 
 module.exports = (event, callback) => {
+  const base64Support = process.env.BINARY_SUPPORT !== 'no'
   const response = {
     body: Buffer.from(''),
-    isBase64Encoded: true,
+    isBase64Encoded: base64Support,
     statusCode: 200,
     headers: {}
   }
@@ -61,7 +62,9 @@ module.exports = (event, callback) => {
   }
   res.end = text => {
     if (text) res.write(text)
-    response.body = Buffer.from(response.body).toString('base64')
+    response.body = Buffer.from(response.body).toString(
+      base64Support ? 'base64' : undefined
+    )
     response.headers = res.headers || {}
     callback(null, response)
   }
