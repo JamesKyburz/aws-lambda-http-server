@@ -8,15 +8,15 @@
     "http",
     "proxy"
   ],
-  "version": "0.0.20",
+  "version": "0.0.21",
   "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
   },
   "dependencies": {
-    "aws-lambda-create-request-response": "0.0.20",
-    "in-memory-http-listener": "0.0.20"
+    "aws-lambda-create-request-response": "0.0.21",
+    "in-memory-http-listener": "0.0.21"
   },
   "files": [
     "src"
