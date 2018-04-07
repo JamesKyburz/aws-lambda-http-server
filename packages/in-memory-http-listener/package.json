@@ -1,5 +1,13 @@
 {
   "name": "in-memory-http-listener",
+  "description": "in memory http server",
+  "keywords": [
+    "aws-lambda",
+    "serverless",
+    "proxy",
+    "http",
+    "server"
+  ],
   "version": "0.0.15",
   "main": "src/index.js",
   "repository": {

@@ -1,5 +1,13 @@
 {
   "name": "aws-lambda-create-request-response",
+  "description": "map request response to lambda",
+  "keywords": [
+    "aws-lambda",
+    "serverless",
+    "proxy",
+    "http",
+    "proxy"
+  ],
   "version": "0.0.15",
   "main": "src/index.js",
   "repository": {

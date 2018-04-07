@@ -1,5 +1,13 @@
 {
   "name": "aws-lambda-http-server",
+  "description": "run http server as aws lambda function",
+  "keywords": [
+    "aws-lambda",
+    "serverless",
+    "proxy",
+    "http",
+    "proxy"
+  ],
   "version": "0.0.15",
   "main": "src/index.js",
   "repository": {
