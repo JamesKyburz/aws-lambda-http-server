@@ -8,7 +8,7 @@
     "http",
     "proxy"
   ],
-  "version": "0.0.21",
+  "version": "0.0.22",
   "main": "src/index.js",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "aws-lambda-create-request-response": "0.0.21",
-    "in-memory-http-listener": "0.0.21"
+    "in-memory-http-listener": "0.0.22"
   },
   "files": [
     "src"
