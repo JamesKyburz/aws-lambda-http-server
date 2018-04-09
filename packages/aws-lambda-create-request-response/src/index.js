@@ -4,7 +4,7 @@ const Stream = require('stream')
 const queryString = require('querystring')
 
 module.exports = (event, callback) => {
-  const base64Support = process.env.BINARY_SUPPORT !== 'no'
+  const base64Support = process.env.BINARY_SUPPORT === 'yes'
   const response = {
     body: Buffer.from(''),
     isBase64Encoded: base64Support,
