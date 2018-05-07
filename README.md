@@ -38,7 +38,6 @@ functions:
     handler: aws-lambda.proxy
     environment:
       PORT: 5000
-      BINARY_SUPPORT: 'no'
     events:
       - http:
           path: /{proxy+}
