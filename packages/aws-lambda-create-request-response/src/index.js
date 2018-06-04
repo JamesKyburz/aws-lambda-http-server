@@ -40,6 +40,14 @@ module.exports = (event, callback) => {
   req.connection = {}
 
   const res = new Stream()
+  Object.defineProperty(res, 'statusCode', {
+    get () {
+      return response.statusCode
+    },
+    set (statusCode) {
+      response.statusCode = statusCode
+    }
+  })
   res.headers = {}
   res.writeHead = (status, headers) => {
     response.statusCode = status
