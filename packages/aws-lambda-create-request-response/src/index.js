@@ -62,6 +62,9 @@ module.exports = (event, callback) => {
   res.setHeader = (name, value) => {
     res.headers[name] = value
   }
+  res.removeHeader = name => {
+    delete res.headers[name]
+  }
   res.getHeader = name => {
     return res.headers[name.toLowerCase()]
   }
