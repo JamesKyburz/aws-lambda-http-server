@@ -77,6 +77,7 @@ module.exports = (event, callback) => {
       base64Support ? 'base64' : undefined
     )
     response.headers = res.headers || {}
+    res.writeHead(response.statusCode)
     callback(null, response)
   }
   if (event.body) {
