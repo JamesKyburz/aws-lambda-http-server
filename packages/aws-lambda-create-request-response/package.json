@@ -8,7 +8,7 @@
     "http",
     "proxy"
   ],
-  "version": "0.0.29",
+  "version": "0.0.31",
   "main": "src/index.js",
   "repository": {
     "type": "git",
