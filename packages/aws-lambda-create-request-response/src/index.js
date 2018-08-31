@@ -94,7 +94,7 @@ module.exports = (event, callback) => {
         delete response.headers[key]
         let i = 0
         for (const value of values) {
-          response.headers[binaryCase('set-cookie', i++)] = value
+          response.headers[binaryCase(key, i++)] = value
         }
       }
     }
