@@ -2,6 +2,7 @@
 
 const Stream = require('stream')
 const queryString = require('querystring')
+const binaryCase = require('binary-case')
 
 module.exports = (event, callback) => {
   const base64Support = process.env.BINARY_SUPPORT === 'yes'
@@ -78,11 +79,25 @@ module.exports = (event, callback) => {
     )
     response.headers = res.headers || {}
     res.writeHead(response.statusCode)
+    fixApiGatewayMultipleHeaders()
     callback(null, response)
   }
   if (event.body) {
     req.push(event.body, event.isBase64Encoded ? 'base64' : 'binary')
     req.push(null)
+  }
+
+  function fixApiGatewayMultipleHeaders () {
+    for (const key of Object.keys(response.headers)) {
+      if (Array.isArray(response.headers[key])) {
+        const values = response.headers[key]
+        delete response.headers[key]
+        let i = 0
+        for (const value of values) {
+          response.headers[binaryCase('set-cookie', i++)] = value
+        }
+      }
+    }
   }
 
   return { req, res }
