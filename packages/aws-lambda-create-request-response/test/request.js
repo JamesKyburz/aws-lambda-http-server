@@ -123,6 +123,43 @@ test('stream', t => {
   req.push(null)
 })
 
+test('text body', t => {
+  const { req } = create({
+    requestContext: {
+      path: ''
+    },
+    body: 'ok',
+    headers: {}
+  })
+  let data = ''
+  req.on('data', chunk => {
+    data += chunk
+  })
+  req.on('end', () => {
+    t.equals('ok', data)
+    t.end()
+  })
+})
+
+test('text base64 body', t => {
+  const { req } = create({
+    requestContext: {
+      path: ''
+    },
+    body: Buffer.from('ok').toString('base64'),
+    isBase64Encoded: true,
+    headers: {}
+  })
+  let data = ''
+  req.on('data', chunk => {
+    data += chunk
+  })
+  req.on('end', () => {
+    t.equals('ok', data)
+    t.end()
+  })
+})
+
 test('connection', t => {
   const { req } = create({
     requestContext: {
