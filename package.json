@@ -9,5 +9,8 @@
     "email": "james.kyburz@gmail.com"
   },
   "devDependencies": {},
+  "scripts": {
+    "test": "npx macleod exec npm t"
+  },
   "private": true
 }

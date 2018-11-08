@@ -19,8 +19,13 @@ module.exports = (event, callback) => {
     new RegExp('^/' + event.requestContext.stage),
     ''
   )
+
   if (event.queryStringParameters) {
-    req.url += '?' + queryString.stringify(event.queryStringParameters)
+    req.url +=
+      '?' +
+      queryString.stringify(event.queryStringParameters, null, null, {
+        encodeURIComponent: f => f
+      })
   }
   req.method = event.httpMethod
   req.rawHeaders = {}

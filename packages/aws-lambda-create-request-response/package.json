@@ -17,8 +17,14 @@
   "dependencies": {
     "binary-case": "1.1.4"
   },
+  "devDependencies": {
+    "tap": "12.0.1"
+  },
   "files": [
     "src"
   ],
+  "scripts": {
+    "test": "tap test/*.js"
+  },
   "license": "Apache-2.0"
 }

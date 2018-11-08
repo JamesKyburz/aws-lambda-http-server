@@ -21,5 +21,11 @@
   "files": [
     "src"
   ],
-  "license": "Apache-2.0"
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "tap": "12.0.1"
+  }
 }
