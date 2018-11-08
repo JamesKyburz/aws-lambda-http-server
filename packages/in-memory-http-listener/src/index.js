@@ -2,14 +2,14 @@ const http = require('http')
 
 const handlers = {}
 
-module.exports = (port) => handlers[port]
+module.exports = port => handlers[port]
 
 http.createServer = fn => {
-  let port = 0
+  let port
   let handler = fn || (f => f)
   const saveHandler = fn => {
     if (fn) handler = fn
-    if (port) handlers[port] = handler
+    if (typeof port !== 'undefined') handlers[port] = handler
   }
   return {
     address: () => ({ port }),
@@ -17,16 +17,26 @@ http.createServer = fn => {
       port = x
       saveHandler()
       cb && cb()
+      return this
     },
-    addEventListener (fn) {
-      saveHandler()
+    removeListener (type) {
+      if (type === 'request') saveHandler(f => f)
+      return this
     },
     removeAllListeners () {
       saveHandler(f => f)
+      return this
     },
     on (type, fn) {
       if (type === 'request') saveHandler(fn)
+      return this
     },
-    close () {}
+    addListener (type, fn) {
+      this.on(type, fn)
+      return this
+    },
+    close () {
+      return this
+    }
   }
 }
