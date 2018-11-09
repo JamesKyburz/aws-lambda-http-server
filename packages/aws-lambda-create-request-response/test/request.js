@@ -5,8 +5,7 @@ test('request url path', t => {
   const { req } = create({
     requestContext: {
       path: '/'
-    },
-    headers: {}
+    }
   })
   t.equals('/', req.url)
   t.end()
@@ -17,8 +16,7 @@ test('request url path with stage removed', t => {
     requestContext: {
       stage: 'dev',
       path: '/dev/'
-    },
-    headers: {}
+    }
   })
   t.equals('/', req.url)
   t.end()
@@ -31,8 +29,7 @@ test('querystring /?x=42', t => {
     },
     queryStringParameters: {
       x: '42'
-    },
-    headers: {}
+    }
   })
   t.equals('/?x=42', req.url)
   t.end()
@@ -45,8 +42,7 @@ test('querystring /?x=åäö', t => {
     },
     queryStringParameters: {
       x: 'åäö'
-    },
-    headers: {}
+    }
   })
   t.equals('/?x=åäö', req.url)
   t.end()
@@ -59,8 +55,7 @@ test('querystring /?x=õ', t => {
     },
     queryStringParameters: {
       x: 'õ'
-    },
-    headers: {}
+    }
   })
   t.equals('/?x=õ', req.url)
   t.end()
@@ -71,8 +66,7 @@ test('request method', t => {
     requestContext: {
       path: ''
     },
-    httpMethod: 'GET',
-    headers: {}
+    httpMethod: 'GET'
   })
   t.equals('GET', req.method)
   t.end()
@@ -83,13 +77,12 @@ test('request headers', t => {
     requestContext: {
       path: ''
     },
-    headers: {
-      'x-cUstom-1': '42',
-      'x-custom-2': '43'
+    multiValueHeaders: {
+      'x-cUstom-1': ['42'],
+      'x-custom-2': ['43']
     }
   })
   t.equals('42', req.headers['x-custom-1'])
-  t.equals('42', req.rawHeaders['x-cUstom-1'])
   t.equals('42', req.getHeader('x-custom-1'))
   t.equals('43', req.headers['x-custom-2'])
   t.equals('43', req.getHeader('x-custom-2'))
@@ -100,7 +93,27 @@ test('request headers', t => {
     },
     req.getHeaders()
   )
+  t.deepEqual(['x-cUstom-1', '42', 'x-custom-2', '43'], req.rawHeaders)
+  t.end()
+})
 
+test('request headers with same name', t => {
+  const { req } = create({
+    requestContext: {
+      path: ''
+    },
+    multiValueHeaders: {
+      'x-multiple-1': ['41', '42']
+    }
+  })
+  t.equals('41,42', req.headers['x-multiple-1'])
+  t.deepEqual(
+    {
+      'x-multiple-1': '41,42'
+    },
+    req.getHeaders()
+  )
+  t.deepEqual(['x-multiple-1', '41', 'x-multiple-1', '42'], req.rawHeaders)
   t.end()
 })
 

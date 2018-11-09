@@ -28,12 +28,17 @@ module.exports = (event, callback) => {
       })
   }
   req.method = event.httpMethod
-  req.rawHeaders = {}
+  req.rawHeaders = []
   req.headers = {}
 
-  for (const key of Object.keys(event.headers)) {
-    req.rawHeaders[key] = event.headers[key]
-    req.headers[key.toLowerCase()] = event.headers[key]
+  const headers = event.multiValueHeaders || {}
+
+  for (const key of Object.keys(headers || {})) {
+    for (const value of headers[key]) {
+      req.rawHeaders.push(key)
+      req.rawHeaders.push(value)
+    }
+    req.headers[key.toLowerCase()] = headers[key].toString()
   }
 
   req.getHeader = name => {
