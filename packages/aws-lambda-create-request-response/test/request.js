@@ -27,8 +27,8 @@ test('querystring /?x=42', t => {
     requestContext: {
       path: '/'
     },
-    queryStringParameters: {
-      x: '42'
+    multiValueQueryStringParameters: {
+      x: ['42']
     }
   })
   t.equals('/?x=42', req.url)
@@ -40,8 +40,8 @@ test('querystring /?x=åäö', t => {
     requestContext: {
       path: '/'
     },
-    queryStringParameters: {
-      x: 'åäö'
+    multiValueQueryStringParameters: {
+      x: ['åäö']
     }
   })
   t.equals('/?x=åäö', req.url)
@@ -53,11 +53,24 @@ test('querystring /?x=õ', t => {
     requestContext: {
       path: '/'
     },
-    queryStringParameters: {
-      x: 'õ'
+    multiValueQueryStringParameters: {
+      x: ['õ']
     }
   })
   t.equals('/?x=õ', req.url)
+  t.end()
+})
+
+test('querystring with multiple values for same name /?x=1&x=2', t => {
+  const { req } = create({
+    requestContext: {
+      path: '/'
+    },
+    multiValueQueryStringParameters: {
+      x: ['1', '2']
+    }
+  })
+  t.equals('/?x=1&x=2', req.url)
   t.end()
 })
 

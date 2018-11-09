@@ -20,10 +20,10 @@ module.exports = (event, callback) => {
     ''
   )
 
-  if (event.queryStringParameters) {
+  if (event.multiValueQueryStringParameters) {
     req.url +=
       '?' +
-      queryString.stringify(event.queryStringParameters, null, null, {
+      queryString.stringify(event.multiValueQueryStringParameters, null, null, {
         encodeURIComponent: f => f
       })
   }
