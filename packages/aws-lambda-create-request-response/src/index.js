@@ -22,10 +22,7 @@ module.exports = (event, callback) => {
 
   if (event.multiValueQueryStringParameters) {
     req.url +=
-      '?' +
-      queryString.stringify(event.multiValueQueryStringParameters, null, null, {
-        encodeURIComponent: f => f
-      })
+      '?' + queryString.stringify(event.multiValueQueryStringParameters)
   }
   req.method = event.httpMethod
   req.rawHeaders = []
