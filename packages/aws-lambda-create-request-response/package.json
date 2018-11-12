@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
   },
-  "dependencies": {
-    "binary-case": "1.1.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "tap": "12.0.1"
   },

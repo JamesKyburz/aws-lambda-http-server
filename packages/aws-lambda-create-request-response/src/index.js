@@ -2,7 +2,6 @@
 
 const Stream = require('stream')
 const queryString = require('querystring')
-const binaryCase = require('binary-case')
 
 module.exports = (event, callback) => {
   const base64Support = process.env.BINARY_SUPPORT === 'yes'
@@ -10,7 +9,7 @@ module.exports = (event, callback) => {
     body: Buffer.from(''),
     isBase64Encoded: base64Support,
     statusCode: 200,
-    headers: {}
+    multiValueHeaders: {}
   }
 
   const req = new Stream.Readable()
@@ -84,7 +83,7 @@ module.exports = (event, callback) => {
     response.body = Buffer.from(response.body).toString(
       base64Support ? 'base64' : undefined
     )
-    response.headers = res.headers || {}
+    response.multiValueHeaders = res.headers || {}
     res.writeHead(response.statusCode)
     fixApiGatewayMultipleHeaders()
     callback(null, response)
@@ -95,14 +94,9 @@ module.exports = (event, callback) => {
   }
 
   function fixApiGatewayMultipleHeaders () {
-    for (const key of Object.keys(response.headers)) {
-      if (Array.isArray(response.headers[key])) {
-        const values = response.headers[key]
-        delete response.headers[key]
-        let i = 0
-        for (const value of values) {
-          response.headers[binaryCase(key, i++)] = value
-        }
+    for (const key of Object.keys(response.multiValueHeaders)) {
+      if (!Array.isArray(response.multiValueHeaders[key])) {
+        response.multiValueHeaders[key] = [response.multiValueHeaders[key]]
       }
     }
   }

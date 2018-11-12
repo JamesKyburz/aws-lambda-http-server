@@ -49,10 +49,10 @@ test('writeHead headers', t => {
       t.error(err)
       t.deepEquals(
         {
-          'x-custom-1': '1',
-          'x-custom-2': '2'
+          'x-custom-1': ['1'],
+          'x-custom-2': ['2']
         },
-        result.headers
+        result.multiValueHeaders
       )
       t.end()
     }
@@ -76,10 +76,10 @@ test('setHeader', t => {
       t.error(err)
       t.deepEquals(
         {
-          'x-custom-1': '1',
-          'x-custom-2': '2'
+          'x-custom-1': ['1'],
+          'x-custom-2': ['2']
         },
-        result.headers
+        result.multiValueHeaders
       )
       t.end()
     }
@@ -101,10 +101,9 @@ test('multi header support for api gateway', t => {
       t.error(err)
       t.deepEquals(
         {
-          'x-custom-1': '1',
-          'X-custom-1': '1'
+          'x-custom-1': ['1', '1']
         },
-        result.headers
+        result.multiValueHeaders
       )
       t.end()
     }
@@ -125,9 +124,9 @@ test('setHeader + removeHeader', t => {
       t.error(err)
       t.deepEquals(
         {
-          'x-custom-2': '2'
+          'x-custom-2': ['2']
         },
-        result.headers
+        result.multiValueHeaders
       )
       t.end()
     }
