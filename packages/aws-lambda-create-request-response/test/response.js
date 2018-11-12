@@ -168,6 +168,7 @@ test(`res.write('ok')`, t => {
     },
     (err, result) => {
       t.error(err)
+      t.equals(false, result.isBase64Encoded)
       t.equals('ok', result.body)
       t.end()
     }
@@ -186,6 +187,7 @@ test(`res.end('ok')`, t => {
     },
     (err, result) => {
       t.error(err)
+      t.equals(false, result.isBase64Encoded)
       t.equals('ok', result.body)
       t.end()
     }
@@ -203,6 +205,7 @@ test('req.pipe(res)', t => {
     },
     (err, result) => {
       t.error(err)
+      t.equals(false, result.isBase64Encoded)
       t.equals('ok', result.body)
       t.end()
     }
@@ -224,6 +227,7 @@ test('base64 support', t => {
     (err, result) => {
       t.error(err)
       t.equals(Buffer.from('ok').toString('base64'), result.body)
+      t.equals(true, result.isBase64Encoded)
       t.end()
     }
   )
