@@ -16,7 +16,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "tap": "12.0.1"
+    "tap": "12.1.0"
   },
   "files": [
     "src"
