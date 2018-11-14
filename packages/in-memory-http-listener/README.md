@@ -4,8 +4,8 @@ Overrides http server listen function to be in memory.
 
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
 [![build status](https://api.travis-ci.org/JamesKyburz/aws-lambda-http-server.svg)](https://travis-ci.org/JamesKyburz/aws-lambda-http-server)
-[![downloads](https://img.shields.io/npm/dm/in-memory-http-server.svg)](https://npmjs.org/package/in-memory-http-server)
-[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/in-memory-http-server.svg)](https://greenkeeper.io/)
+[![downloads](https://img.shields.io/npm/dm/in-memory-http-listener.svg)](https://npmjs.org/package/in-memory-http-listener)
+[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/in-memory-http-listener.svg)](https://greenkeeper.io/)
 
 # usage
 
