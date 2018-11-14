@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "aws-lambda-create-request-response": "0.1.8",
-    "in-memory-http-listener": "0.1.7"
+    "in-memory-http-listener": "0.1.8"
   },
   "files": [
     "src"
