@@ -6,7 +6,8 @@
     "serverless",
     "proxy",
     "http",
-    "proxy"
+    "proxy",
+    "api-gateway"
   ],
   "version": "0.1.10",
   "main": "src/index.js",
