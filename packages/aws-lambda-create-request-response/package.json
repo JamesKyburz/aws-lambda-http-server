@@ -9,7 +9,7 @@
     "proxy",
     "api-gateway"
   ],
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "src/index.js",
   "repository": {
     "type": "git",

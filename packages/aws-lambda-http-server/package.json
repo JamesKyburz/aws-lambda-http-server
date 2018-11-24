@@ -9,15 +9,15 @@
     "proxy",
     "api-gateway"
   ],
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
   },
   "dependencies": {
-    "aws-lambda-create-request-response": "0.1.10",
-    "in-memory-http-listener": "0.1.10"
+    "aws-lambda-create-request-response": "0.1.11",
+    "in-memory-http-listener": "0.1.11"
   },
   "files": [
     "src"
