@@ -10,5 +10,5 @@ module.exports = (event, context, callback) => {
     return callback(null, 'Lambda is warm!')
   }
   const { req, res } = createRequestResponse(event, callback)
-  httpHandler(process.env.PORT)(req, res)
+  httpHandler(process.env.SERVER_PORT || process.env.PORT)(req, res)
 }

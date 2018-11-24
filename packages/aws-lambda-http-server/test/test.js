@@ -45,3 +45,15 @@ test('ok response', t => {
     t.end()
   })
 })
+
+test('SERVER_PORT', t => {
+  delete process.env.PORT
+  process.env.SERVER_PORT = 1
+  server.on('request', (req, res) => res.end('ok'))
+  handler(event, {}, (err, result) => {
+    t.error(err)
+    t.equals('ok', result.body)
+    t.equals(200, result.statusCode)
+    t.end()
+  })
+})
