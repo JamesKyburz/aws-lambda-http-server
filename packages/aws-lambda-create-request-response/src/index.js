@@ -89,7 +89,7 @@ module.exports = (event, callback) => {
     callback(null, response)
   }
   if (event.body) {
-    req.push(event.body, event.isBase64Encoded ? 'base64' : 'binary')
+    req.push(event.body, event.isBase64Encoded ? 'base64' : undefined)
     req.push(null)
   }
 

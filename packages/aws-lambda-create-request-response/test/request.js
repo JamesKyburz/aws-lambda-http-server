@@ -205,6 +205,24 @@ test('text base64 body', t => {
   })
 })
 
+test('text body with encoding', t => {
+  const { req } = create({
+    requestContext: {
+      path: ''
+    },
+    body: 'åäöß',
+    headers: {}
+  })
+  let data = ''
+  req.on('data', chunk => {
+    data += chunk
+  })
+  req.on('end', () => {
+    t.equals('åäöß', data)
+    t.end()
+  })
+})
+
 test('connection', t => {
   const { req } = create({
     requestContext: {
