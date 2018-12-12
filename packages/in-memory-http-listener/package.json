@@ -24,6 +24,6 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "tap": "12.1.0"
+    "tap": "12.1.1"
   }
 }
