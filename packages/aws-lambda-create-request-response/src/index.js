@@ -14,7 +14,7 @@ module.exports = (event, callback) => {
 
   const req = new Stream.Readable()
   req._read = f => f
-  req.url = event.requestContext.path.replace(
+  req.url = (event.requestContext.path || event.path || '').replace(
     new RegExp('^/' + event.requestContext.stage),
     ''
   )

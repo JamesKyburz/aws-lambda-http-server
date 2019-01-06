@@ -11,6 +11,15 @@ test('request url path', t => {
   t.end()
 })
 
+test('request url path fallback', t => {
+  const { req } = create({
+    requestContext: {},
+    path: '/'
+  })
+  t.equals('/', req.url)
+  t.end()
+})
+
 test('request url path with stage removed', t => {
   const { req } = create({
     requestContext: {
