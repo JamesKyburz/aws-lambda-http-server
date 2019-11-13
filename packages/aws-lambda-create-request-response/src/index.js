@@ -57,10 +57,12 @@ module.exports = (event, callback) => {
   })
   res.headers = {}
   res.writeHead = (status, headers) => {
+    res.headersSent = true
     response.statusCode = status
     if (headers) res.headers = Object.assign(res.headers, headers)
   }
   res.write = chunk => {
+    res.headersSent = true
     response.body = Buffer.concat([
       response.body,
       Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
