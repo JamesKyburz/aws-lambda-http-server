@@ -6,7 +6,7 @@ const httpHandler = require('..')
 test('on', t => {
   const server = http.createServer()
   const port = 0
-  server.listen(port)
+  server.listen(port, f => f)
 
   t.equals(port, server.address().port)
   t.equals('function', typeof httpHandler(port))

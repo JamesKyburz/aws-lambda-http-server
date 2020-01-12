@@ -29,7 +29,7 @@ module.exports = (event, callback) => {
 
   const headers = event.multiValueHeaders || {}
 
-  for (const key of Object.keys(headers || {})) {
+  for (const key of Object.keys(headers)) {
     for (const value of headers[key]) {
       req.rawHeaders.push(key)
       req.rawHeaders.push(value)
@@ -85,7 +85,7 @@ module.exports = (event, callback) => {
     response.body = Buffer.from(response.body).toString(
       base64Support ? 'base64' : undefined
     )
-    response.multiValueHeaders = res.headers || {}
+    response.multiValueHeaders = res.headers
     res.writeHead(response.statusCode)
     fixApiGatewayMultipleHeaders()
     callback(null, response)

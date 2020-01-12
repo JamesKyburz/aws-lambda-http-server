@@ -16,6 +16,7 @@ test('statusCode writeHead 404', t => {
     }
   )
   res.writeHead(404)
+  t.equals(res.statusCode, 404)
   res.end()
 })
 
@@ -34,6 +35,7 @@ test('statusCode statusCode=200', t => {
     }
   )
   res.statusCode = 200
+  t.equals(res.statusCode, 200)
   res.end()
 })
 
