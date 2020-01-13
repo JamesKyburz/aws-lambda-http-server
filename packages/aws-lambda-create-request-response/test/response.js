@@ -92,6 +92,33 @@ test('setHeader', t => {
   res.end()
 })
 
+test('hasHeader', t => {
+  const { res } = create(
+    {
+      requestContext: {
+        path: '/'
+      },
+      headers: {}
+    },
+    (err, result) => {
+      t.error(err)
+      t.deepEquals(
+        {
+          'x-custom-1': ['1'],
+          'x-custom-2': ['2']
+        },
+        result.multiValueHeaders
+      )
+      t.end()
+    }
+  )
+  res.setHeader('x-custom-1', '1')
+  res.setHeader('x-custom-2', '2')
+  t.equals(res.hasHeader('x-custom-1'), true)
+  t.equals(res.hasHeader('x-custom-2'), true)
+  res.end()
+})
+
 test('multi header support for api gateway', t => {
   const { res } = create(
     {

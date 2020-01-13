@@ -1,4 +1,4 @@
-require('./local-require')
+require('./helpers/local-require')
 const { test } = require('tap')
 const http = require('http')
 const handler = require('..')

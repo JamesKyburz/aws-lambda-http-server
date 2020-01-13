@@ -4,15 +4,17 @@ const handler = require('..')
 
 process.env.PORT = 1
 
-const express = require('express')
-const app = express()
+const fastify = require('fastify')
+const app = fastify()
 
 let onRequest = (req, res) => res.send()
 
-app.get('/', (req, res) => onRequest(res, res))
-app.listen(process.env.PORT)
-
 const event = { httpMethod: 'GET', requestContext: { path: '/' }, headers: {} }
+
+test('setup server', t => {
+  app.get('/', (req, res) => onRequest(res, res))
+  app.listen(process.env.PORT, () => t.end())
+})
 
 test('callbackWaitsForEmptyEventLoop yes', t => {
   process.env.WAIT_FOR_EMPTY_EVENT_LOOP = 'yes'

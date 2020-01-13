@@ -77,16 +77,19 @@ module.exports = (event, callback) => {
     ])
   }
   res.setHeader = (name, value) => {
-    res.headers[name] = value
+    res.headers[name.toLowerCase()] = value
   }
   res.removeHeader = name => {
-    delete res.headers[name]
+    delete res.headers[name.toLowerCase()]
   }
   res.getHeader = name => {
     return res.headers[name.toLowerCase()]
   }
   res.getHeaders = () => {
     return res.headers
+  }
+  res.hasHeader = name => {
+    return undefined !== res.getHeader(name)
   }
   res.end = text => {
     if (text) res.write(text)

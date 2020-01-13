@@ -14,6 +14,30 @@ test('on', t => {
   httpHandler(port)(null, null)
 })
 
+test('once', t => {
+  const server = http.createServer()
+  const port = 0
+  server.listen(port, f => f)
+  server.once('clientError', f => f)
+
+  t.equals(port, server.address().port)
+  t.equals('function', typeof httpHandler(port))
+  server.on('request', () => t.end())
+  httpHandler(port)(null, null)
+})
+
+test('listen with object', t => {
+  const server = http.createServer()
+  const port = 0
+  server.listen({ port }, f => f)
+  server.once('clientError', f => f)
+
+  t.equals(port, server.address().port)
+  t.equals('function', typeof httpHandler(port))
+  server.on('request', () => t.end())
+  httpHandler(port)(null, null)
+})
+
 test('addListener', t => {
   const server = http.createServer()
   const port = 0
