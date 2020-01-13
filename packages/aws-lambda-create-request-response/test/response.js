@@ -63,6 +63,7 @@ test('writeHead headers', t => {
     'x-custom-1': '1',
     'x-custom-2': '2'
   })
+  t.equals(res.headersSent, true)
   res.end()
 })
 
@@ -175,6 +176,7 @@ test(`res.write('ok')`, t => {
     }
   )
   res.write('ok')
+  t.equals(res.headersSent, true)
   res.end()
 })
 

@@ -19,6 +19,8 @@ module.exports = (event, callback) => {
     ''
   )
 
+  req.finished = true
+
   if (event.multiValueQueryStringParameters) {
     req.url +=
       '?' + queryString.stringify(event.multiValueQueryStringParameters)
@@ -47,6 +49,7 @@ module.exports = (event, callback) => {
   req.connection = {}
 
   const res = new Stream()
+  let headersSent = false
   Object.defineProperty(res, 'statusCode', {
     get () {
       return response.statusCode
@@ -55,14 +58,19 @@ module.exports = (event, callback) => {
       response.statusCode = statusCode
     }
   })
+  Object.defineProperty(res, 'headersSent', {
+    get () {
+      return headersSent
+    }
+  })
   res.headers = {}
   res.writeHead = (status, headers) => {
-    res.headersSent = true
+    headersSent = true
     response.statusCode = status
     if (headers) res.headers = Object.assign(res.headers, headers)
   }
   res.write = chunk => {
-    res.headersSent = true
+    headersSent = true
     response.body = Buffer.concat([
       response.body,
       Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)

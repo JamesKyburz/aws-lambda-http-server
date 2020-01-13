@@ -27,6 +27,8 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
+    "express": "4.17.1",
+    "fastify": "2.11.0",
     "tap": "14.10.5"
   }
 }

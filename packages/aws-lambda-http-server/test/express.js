@@ -1,14 +1,18 @@
 require('./local-require')
 const { test } = require('tap')
-const http = require('http')
 const handler = require('..')
 
 process.env.PORT = 1
 
-const server = http.createServer((req, res) => res.end())
-server.listen(process.env.PORT)
+const express = require('express')
+const app = express()
 
-const event = { requestContext: { path: '' }, headers: {} }
+let onRequest = (req, res) => res.send()
+
+app.get('/', (req, res) => onRequest(res, res))
+app.listen(process.env.PORT)
+
+const event = { httpMethod: 'GET', requestContext: { path: '/' }, headers: {} }
 
 test('callbackWaitsForEmptyEventLoop yes', t => {
   process.env.WAIT_FOR_EMPTY_EVENT_LOOP = 'yes'
@@ -38,7 +42,9 @@ test('serverless-plugin-warmup', t => {
 })
 
 test('ok response', t => {
-  server.on('request', (req, res) => res.end('ok'))
+  onRequest = (req, res) => {
+    res.send('ok')
+  }
   handler(event, {}, (err, result) => {
     t.error(err)
     t.equals('ok', result.body)
@@ -50,10 +56,12 @@ test('ok response', t => {
 test('SERVER_PORT', t => {
   delete process.env.PORT
   process.env.SERVER_PORT = 1
-  server.on('request', (req, res) => res.end('ok'))
+  onRequest = (req, res) => {
+    res.send('still ok')
+  }
   handler(event, {}, (err, result) => {
     t.error(err)
-    t.equals('ok', result.body)
+    t.equals('still ok', result.body)
     t.equals(200, result.statusCode)
     t.end()
   })
