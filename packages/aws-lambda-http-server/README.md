@@ -23,7 +23,7 @@ exports.proxy = require('aws-lambda-http-server')
 require('./server.js')
 ```
 
-## serverless.yml
+## serverless.yml example
 
 ```yaml
 service: test
