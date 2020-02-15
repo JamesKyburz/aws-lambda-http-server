@@ -11,6 +11,7 @@ test('on', t => {
   t.equals(port, server.address().port)
   t.equals('function', typeof httpHandler(port))
   server.on('request', () => t.end())
+  server.on('clientError', f => f)
   httpHandler(port)(null, null)
 })
 
@@ -91,6 +92,7 @@ test('removeListener', t => {
   t.equals('function', typeof httpHandler(port))
   server.on('request', (req, res) => res.end('ok'))
   server.removeListener('request')
+  server.removeListener('x')
   httpHandler(port)(null, {
     end (data) {
       t.fail()
@@ -150,6 +152,7 @@ test('methods return this', t => {
   t.equals(server.removeListener('x'), server)
   t.equals(server.removeAllListeners(), server)
   t.equals(server.on('x', f => f), server)
+  t.equals(server.once('x', f => f), server)
   t.equals(server.addListener('x', f => f), server)
   t.equals(server.close(), server)
   t.end()

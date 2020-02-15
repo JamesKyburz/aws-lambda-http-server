@@ -9,8 +9,9 @@ module.exports = port => {
 }
 
 http.createServer = fn => {
+  const noop = f => f
   let port
-  let handler = fn || (f => f)
+  let handler = fn || noop
   const saveHandler = fn => {
     if (fn) handler = fn
     if (typeof port !== 'undefined') handlers[port] = handler
@@ -25,11 +26,11 @@ http.createServer = fn => {
       return this
     },
     removeListener (type) {
-      if (type === 'request') saveHandler(f => f)
+      if (type === 'request') saveHandler(noop)
       return this
     },
     removeAllListeners () {
-      saveHandler(f => f)
+      saveHandler(noop)
       return this
     },
     on (type, fn) {
