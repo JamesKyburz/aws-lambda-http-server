@@ -49,6 +49,23 @@ test('addListener', t => {
   httpHandler(port)(null, null)
 })
 
+test('return handler when no port given, if only one handler exists', t => {
+  const server = http.createServer()
+  server.listen(0, f => f)
+  t.equals('function', typeof httpHandler())
+  server.on('request', () => t.end())
+  httpHandler()(null, null)
+})
+
+test('no handler returned when no port given and multiple handlers exist', t => {
+  t.plan(1)
+  const server = http.createServer()
+  server.listen(0, f => f)
+  const server2 = http.createServer()
+  server2.listen(5000, f => f)
+  t.equals('undefined', typeof httpHandler())
+})
+
 test('simple response', t => {
   const server = http.createServer()
   const port = 0
