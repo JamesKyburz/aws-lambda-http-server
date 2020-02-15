@@ -2,7 +2,11 @@ const http = require('http')
 
 const handlers = {}
 
-module.exports = port => handlers[port]
+module.exports = port => {
+  if (typeof port !== 'undefined') return handlers[port]
+  const keys = Object.keys(handlers)
+  if (keys.length === 1) return handlers[keys[0]]
+}
 
 http.createServer = fn => {
   let port
