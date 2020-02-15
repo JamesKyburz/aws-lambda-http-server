@@ -13,7 +13,6 @@ module.exports = (event, callback) => {
   }
 
   const req = new Stream.Readable()
-  req._read = f => f
   req.url = (event.requestContext.path || event.path || '').replace(
     new RegExp('^/' + event.requestContext.stage),
     ''
@@ -67,7 +66,7 @@ module.exports = (event, callback) => {
   res.writeHead = (status, headers) => {
     headersSent = true
     response.statusCode = status
-    if (headers) res.headers = Object.assign(res.headers, headers)
+    res.headers = Object.assign(res.headers, headers)
   }
   res.write = chunk => {
     headersSent = true
