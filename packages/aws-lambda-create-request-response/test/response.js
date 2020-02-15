@@ -225,6 +225,24 @@ test(`res.end('ok')`, t => {
   res.end('ok')
 })
 
+test(`res.end(Buffer.from('ok'))`, t => {
+  const { res } = create(
+    {
+      requestContext: {
+        path: '/'
+      },
+      headers: {}
+    },
+    (err, result) => {
+      t.error(err)
+      t.equals(false, result.isBase64Encoded)
+      t.equals('ok', result.body)
+      t.end()
+    }
+  )
+  res.end(Buffer.from('ok'))
+})
+
 test('req.pipe(res)', t => {
   const { req, res } = create(
     {
