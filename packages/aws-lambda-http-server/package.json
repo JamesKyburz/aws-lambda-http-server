@@ -20,7 +20,7 @@
     "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
   },
   "dependencies": {
-    "aws-lambda-create-request-response": "0.1.43",
+    "aws-lambda-create-request-response": "0.1.46",
     "in-memory-http-listener": "0.1.43",
     "server-base": "7.0.110"
   },
