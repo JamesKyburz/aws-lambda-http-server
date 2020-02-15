@@ -13,7 +13,7 @@
     "fastify",
     "server-base"
   ],
-  "version": "0.1.43",
+  "version": "0.1.46",
   "main": "src/index.js",
   "repository": {
     "type": "git",
