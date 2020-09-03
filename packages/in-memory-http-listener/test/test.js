@@ -146,6 +146,13 @@ test('listen', t => {
   t.end()
 })
 
+test('setTimeout', t => {
+  const server = http.createServer()
+  t.equals(typeof server.setTimeout, 'function')
+  t.doesNotThrow(server.setTimeout)
+  t.end()
+})
+
 test('methods return this', t => {
   const server = http.createServer()
   t.equals(server.listen(), server)

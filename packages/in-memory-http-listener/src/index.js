@@ -17,6 +17,7 @@ http.createServer = fn => {
     if (typeof port !== 'undefined') handlers[port] = handler
   }
   return {
+    setTimeout: f => f,
     address: () => ({ address: '::', family: 'IPv6', port }),
     listen (listenPort, cb) {
       if (typeof listenPort === 'object') listenPort = listenPort.port

@@ -3,36 +3,40 @@ const create = require('..')
 
 test('request url path', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: '/'
     }
   })
-  t.equals('/', req.url)
+  t.equals(req.url, '/')
   t.end()
 })
 
 test('request url path fallback', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {},
     path: '/'
   })
-  t.equals('/', req.url)
+  t.equals(req.url, '/')
   t.end()
 })
 
 test('request url path with stage removed', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       stage: 'dev',
       path: '/dev/'
     }
   })
-  t.equals('/', req.url)
+  t.equals(req.url, '/')
   t.end()
 })
 
 test('querystring /?x=42', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: '/'
     },
@@ -40,12 +44,13 @@ test('querystring /?x=42', t => {
       x: ['42']
     }
   })
-  t.equals('/?x=42', req.url)
+  t.equals(req.url, '/?x=42')
   t.end()
 })
 
 test('querystring /?x=åäö', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: '/'
     },
@@ -53,12 +58,13 @@ test('querystring /?x=åäö', t => {
       x: ['åäö']
     }
   })
-  t.equals('/?x=%C3%A5%C3%A4%C3%B6', req.url)
+  t.equals(req.url, '/?x=%C3%A5%C3%A4%C3%B6')
   t.end()
 })
 
 test('querystring /?x=õ', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: '/'
     },
@@ -66,12 +72,13 @@ test('querystring /?x=õ', t => {
       x: ['õ']
     }
   })
-  t.equals('/?x=%C3%B5', req.url)
+  t.equals(req.url, '/?x=%C3%B5')
   t.end()
 })
 
 test('querystring with multiple values for same name /?x=1&x=2', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: '/'
     },
@@ -79,12 +86,13 @@ test('querystring with multiple values for same name /?x=1&x=2', t => {
       x: ['1', '2']
     }
   })
-  t.equals('/?x=1&x=2', req.url)
+  t.equals(req.url, '/?x=1&x=2')
   t.end()
 })
 
 test('complicated querystring', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: '/'
     },
@@ -96,25 +104,27 @@ test('complicated querystring', t => {
     }
   })
   t.equals(
-    '/?url=https%3A%2F%2Fexample.com%2Ft%2Ft%3Fa%3D8%26as%3D1%26t%3D2%26tk%3D1%26url%3Dhttps%3A%2F%2Fexample.com%2F%C3%B5&clickSource=yes&category=cat',
-    req.url
+    req.url,
+    '/?url=https%3A%2F%2Fexample.com%2Ft%2Ft%3Fa%3D8%26as%3D1%26t%3D2%26tk%3D1%26url%3Dhttps%3A%2F%2Fexample.com%2F%C3%B5&clickSource=yes&category=cat'
   )
   t.end()
 })
 
 test('request method', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
     httpMethod: 'GET'
   })
-  t.equals('GET', req.method)
+  t.equals(req.method, 'GET')
   t.end()
 })
 
 test('request headers', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
@@ -123,23 +133,21 @@ test('request headers', t => {
       'x-custom-2': ['43']
     }
   })
-  t.equals('42', req.headers['x-custom-1'])
-  t.equals('42', req.getHeader('x-custom-1'))
-  t.equals('43', req.headers['x-custom-2'])
-  t.equals('43', req.getHeader('x-custom-2'))
-  t.deepEqual(
-    {
-      'x-custom-1': '42',
-      'x-custom-2': '43'
-    },
-    req.getHeaders()
-  )
-  t.deepEqual(['x-cUstom-1', '42', 'x-custom-2', '43'], req.rawHeaders)
+  t.equals(req.headers['x-custom-1'], '42')
+  t.equals(req.getHeader('x-custom-1'), '42')
+  t.equals(req.headers['x-custom-2'], '43')
+  t.equals(req.getHeader('x-custom-2'), '43')
+  t.deepEqual(req.getHeaders(), {
+    'x-custom-1': '42',
+    'x-custom-2': '43'
+  })
+  t.deepEqual(req.rawHeaders, ['x-cUstom-1', '42', 'x-custom-2', '43'])
   t.end()
 })
 
 test('request headers with same name', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
@@ -147,30 +155,28 @@ test('request headers with same name', t => {
       'x-multiple-1': ['41', '42']
     }
   })
-  t.equals('41,42', req.headers['x-multiple-1'])
-  t.deepEqual(
-    {
-      'x-multiple-1': '41,42'
-    },
-    req.getHeaders()
-  )
-  t.deepEqual(['x-multiple-1', '41', 'x-multiple-1', '42'], req.rawHeaders)
+  t.equals(req.headers['x-multiple-1'], '41,42')
+  t.deepEqual(req.getHeaders(), {
+    'x-multiple-1': '41,42'
+  })
+  t.deepEqual(req.rawHeaders, ['x-multiple-1', '41', 'x-multiple-1', '42'])
   t.end()
 })
 
 test('stream', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
-    headers: {}
+    multiValueHeaders: {}
   })
   let data = ''
   req.on('data', chunk => {
     data += chunk
   })
   req.on('end', () => {
-    t.equals('ok', data)
+    t.equals(data, 'ok')
     t.end()
   })
   req.push('ok')
@@ -179,66 +185,70 @@ test('stream', t => {
 
 test('text body', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
     body: 'ok',
-    headers: {}
+    multiValueHeaders: {}
   })
   let data = ''
   req.on('data', chunk => {
     data += chunk
   })
   req.on('end', () => {
-    t.equals('ok', data)
+    t.equals(data, 'ok')
     t.end()
   })
 })
 
 test('text base64 body', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
     body: Buffer.from('ok').toString('base64'),
     isBase64Encoded: true,
-    headers: {}
+    multiValueHeaders: {}
   })
   let data = ''
   req.on('data', chunk => {
     data += chunk
   })
   req.on('end', () => {
-    t.equals('ok', data)
+    t.equals(data, 'ok')
     t.end()
   })
 })
 
 test('text body with encoding', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
     body: 'åäöß',
-    headers: {}
+    multiValueHeaders: {}
   })
   let data = ''
   req.on('data', chunk => {
     data += chunk
   })
   req.on('end', () => {
-    t.equals('åäöß', data)
+    t.equals(data, 'åäöß')
     t.end()
   })
 })
 
 test('connection', t => {
   const { req } = create({
+    version: '1.0',
     requestContext: {
       path: ''
     },
-    headers: {}
+    multiValueHeaders: {}
   })
-  t.deepEqual({}, req.connection)
+  t.deepEqual(req.connection, {})
   t.end()
 })
