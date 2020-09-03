@@ -33,8 +33,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "express": "4.17.1",
-    "fastify": "2.12.0",
-    "koa": "2.11.0",
-    "tap": "14.10.6"
+    "fastify": "3.3.0",
+    "koa": "2.13.0",
+    "tap": "14.10.8"
   }
 }
