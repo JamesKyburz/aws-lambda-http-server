@@ -4,12 +4,7 @@ const Stream = require('stream')
 const queryString = require('querystring')
 
 module.exports = (event, callback) => {
-  const { version } = event
-  if (version !== '1.0' && version !== '2.0') {
-    return callback(
-      new Error(`unsupported version ${version} ${JSON.stringify(event)}`)
-    )
-  }
+  const { version = '1.0' } = event
   const isBase64Encoded = process.env.BINARY_SUPPORT === 'yes'
   const response = {
     body: Buffer.from(''),

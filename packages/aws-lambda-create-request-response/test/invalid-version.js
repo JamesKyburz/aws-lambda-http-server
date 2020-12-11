@@ -2,8 +2,10 @@ const { test } = require('tap')
 const create = require('..')
 
 test('incorrect or missing version', t => {
-  t.plan(1)
-  create({}, err => {
-    t.equals(err.message, 'unsupported version undefined {}')
+  const { req } = create({
+    requestContext: {},
+    path: '/'
   })
+  t.equals(req.url, '/')
+  t.end()
 })
