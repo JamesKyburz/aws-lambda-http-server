@@ -13,15 +13,15 @@
     "fastify",
     "server-base"
   ],
-  "version": "0.2.3",
+  "version": "0.2.7",
   "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/JamesKyburz/aws-lambda-http-server.git"
   },
   "dependencies": {
-    "aws-lambda-create-request-response": "^0.2.3",
-    "in-memory-http-listener": "^0.2.3",
+    "aws-lambda-create-request-response": "^0.2.7",
+    "in-memory-http-listener": "^0.2.7",
     "server-base": "7.1.23"
   },
   "files": [
