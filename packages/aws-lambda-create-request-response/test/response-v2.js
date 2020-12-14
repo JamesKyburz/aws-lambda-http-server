@@ -6,7 +6,12 @@ test('statusCode writeHead 404', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -25,7 +30,12 @@ test('statusCode statusCode=200', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -44,7 +54,12 @@ test('writeHead headers', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -69,7 +84,12 @@ test('setHeader', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -91,15 +111,18 @@ test('single cookie', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
       t.error(err)
       t.equals(result.headers['set-cookie'], undefined)
-      t.deepEquals(result.cookies, [
-        'a=1'
-      ])
+      t.deepEquals(result.cookies, ['a=1'])
       t.end()
     }
   )
@@ -112,16 +135,18 @@ test('multiple cookies', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
       t.error(err)
       t.equals(result.headers['set-cookie'], undefined)
-      t.deepEquals(result.cookies, [
-        'a=1',
-        'b=2'
-      ])
+      t.deepEquals(result.cookies, ['a=1', 'b=2'])
       t.end()
     }
   )
@@ -134,7 +159,12 @@ test('hasHeader', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -158,7 +188,12 @@ test('multi header support for api gateway', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -178,7 +213,12 @@ test('setHeader + removeHeader', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -199,7 +239,12 @@ test('getHeader/s', t => {
   const { res } = create({
     version: '2.0',
     rawPath: '/',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    },
     headers: {}
   })
   res.setHeader('x-custom-1', '1')
@@ -217,7 +262,12 @@ test(`res.write('ok')`, t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -237,7 +287,12 @@ test(`res.end('ok')`, t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -255,7 +310,12 @@ test(`res.end(Buffer.from('ok'))`, t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'GET',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -273,7 +333,12 @@ test('req.pipe(res)', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'POST',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {
@@ -294,7 +359,12 @@ test('base64 support', t => {
     {
       version: '2.0',
       rawPath: '/',
-      requestContext: {},
+      requestContext: {
+        http: {
+          method: 'POST',
+          path: '/'
+        }
+      },
       headers: {}
     },
     (err, result) => {

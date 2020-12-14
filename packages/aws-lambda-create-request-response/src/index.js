@@ -15,11 +15,10 @@ module.exports = (event, callback) => {
   }
 
   const req = new Stream.Readable()
-  req.url = (
-    event.requestContext.path ||
-    event.path ||
-    event.rawPath ||
-    ''
+
+  req.url = (version === '2.0'
+    ? event.requestContext.http.path || event.rawPath || ''
+    : event.requestContext.path || event.path || event.rawPath || ''
   ).replace(new RegExp('^/' + event.requestContext.stage), '')
 
   req.finished = true
@@ -35,7 +34,8 @@ module.exports = (event, callback) => {
     }
   }
 
-  req.method = event.httpMethod
+  req.method =
+    version === '2.0' ? event.requestContext.http.method : event.httpMethod
   req.rawHeaders = []
   req.headers = {}
 

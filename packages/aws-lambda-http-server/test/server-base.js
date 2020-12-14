@@ -18,8 +18,12 @@ for (const event of [
   },
   {
     version: '2.0',
-    httpMethod: 'GET',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    },
     rawPath: '/'
   }
 ]) {

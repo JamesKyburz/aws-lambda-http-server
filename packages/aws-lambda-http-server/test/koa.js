@@ -11,7 +11,16 @@ let onRequest = ctx => {}
 
 for (const event of [
   { version: '1.0', requestContext: { path: '' }, multiValueHeaders: {} },
-  { version: '2.0', rawPath: '', requestContext: {}, headers: {} }
+  {
+    version: '2.0',
+    rawPath: '',
+    requestContext: {
+      http: {
+        path: ''
+      }
+    },
+    headers: {}
+  }
 ]) {
   test('setup server', t => {
     app.use(ctx => onRequest(ctx))

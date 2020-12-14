@@ -4,7 +4,12 @@ const create = require('..')
 test('request url path', t => {
   const { req } = create({
     version: '2.0',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    },
     rawPath: '/'
   })
   t.equals(req.url, '/')
@@ -16,6 +21,10 @@ test('request url path with stage removed', t => {
     version: '2.0',
     rawPath: '/dev/',
     requestContext: {
+      http: {
+        method: 'GET',
+        path: '/dev/'
+      },
       stage: 'dev'
     }
   })
@@ -27,7 +36,12 @@ test('request with single cookie', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '/',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    },
     cookies: ['a=1']
   })
   t.equals(req.url, '/')
@@ -39,7 +53,12 @@ test('request with multiple cookies', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '/',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    },
     cookies: ['a=1', 'b=2']
   })
   t.equals(req.url, '/')
@@ -51,7 +70,12 @@ test('querystring /?x=42', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '/',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    },
     rawQueryString: 'x=42'
   })
   t.equals(req.url, '/?x=42')
@@ -62,7 +86,10 @@ test('querystring /?x=åäö', t => {
   const { req } = create({
     version: '2.0',
     requestContext: {
-      path: '/'
+      http: {
+        method: 'GET',
+        path: '/'
+      }
     },
     rawQueryString: 'x=%C3%A5%C3%A4%C3%B6'
   })
@@ -74,7 +101,10 @@ test('querystring /?x=õ', t => {
   const { req } = create({
     version: '2.0',
     requestContext: {
-      path: '/'
+      http: {
+        method: 'GET',
+        path: '/'
+      }
     },
     rawQueryString: 'x=%C3%B5'
   })
@@ -86,8 +116,12 @@ test('request method', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
-    httpMethod: 'GET'
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: '/'
+      }
+    }
   })
   t.equals(req.method, 'GET')
   t.end()
@@ -97,7 +131,12 @@ test('request headers', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     headers: {
       'x-cUstom-1': '42',
       'x-custom-2': '43'
@@ -119,7 +158,12 @@ test('request headers with same name', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     headers: {
       'x-multiple-1': '41,42'
     }
@@ -136,7 +180,12 @@ test('stream', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     headers: {}
   })
   let data = ''
@@ -155,7 +204,12 @@ test('text body', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     body: 'ok',
     headers: {}
   })
@@ -173,7 +227,12 @@ test('text base64 body', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     body: Buffer.from('ok').toString('base64'),
     isBase64Encoded: true,
     headers: {}
@@ -192,7 +251,12 @@ test('text body with encoding', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     body: 'åäöß',
     headers: {}
   })
@@ -210,7 +274,12 @@ test('connection', t => {
   const { req } = create({
     version: '2.0',
     rawPath: '',
-    requestContext: {},
+    requestContext: {
+      http: {
+        method: 'GET',
+        path: ''
+      }
+    },
     headers: {}
   })
   t.deepEqual(req.connection, {})

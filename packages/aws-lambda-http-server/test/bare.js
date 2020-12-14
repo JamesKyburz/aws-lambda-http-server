@@ -10,7 +10,12 @@ server.listen(process.env.PORT)
 
 for (const event of [
   { version: '1.0', requestContext: { path: '' }, multiValueHeaders: {} },
-  { version: '2.0', rawPath: '', requestContext: {}, headers: {} }
+  {
+    version: '2.0',
+    rawPath: '',
+    requestContext: { http: { path: '' } },
+    headers: {}
+  }
 ]) {
   test('callbackWaitsForEmptyEventLoop yes', t => {
     process.env.WAIT_FOR_EMPTY_EVENT_LOOP = 'yes'
